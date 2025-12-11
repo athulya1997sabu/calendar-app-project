@@ -34,9 +34,23 @@ return (
         style={{ height: 500 }}
         selectable
         onSelectSlot={handleSelect}
-        eventPropGetter={(event) => ({
-          style: { backgroundColor: "#4BCD3E", color: "white" },
-        })}
+        eventPropGetter={(event) => {
+          const eventDate = moment(event.start).format("YYYY-MM-DD");
+
+          let style = {
+            backgroundColor: "#4BCD3E",
+            color: "white"
+          };
+          if (eventDate === selectedDate) {
+            style = {
+              backgroundColor: "#FF9800",
+              color: "red",
+              border: "2px solid #000"
+            };
+          }
+
+          return { style };
+        }}
       />
       {popupOpen && (
         <DataPopup open={popupOpen} setOpen={setPopupOpen} />
